@@ -26,11 +26,11 @@ During the cloning process, Git will attempt to merge your repository with the e
 
 ### 3. Review and Modify Project Files
 
-After cloning and merging, you can review and modify any files that are different between your project and the **'appstarter'** template as needed. Customize the project to fit your specific requirements, such as the login and registration functionality.
+After cloning and merging, you can review and modify any files that are different between your project and the `appstarter` template as needed. Customize the project to fit your specific requirements, such as the login and registration functionality.
 
 ### 4. Set Up Configurations and Dependencies
 
-Set up any specific configurations, dependencies, or environment variables that are unique to your project. Ensure that your database connection is properly configured in the **.env** file, and create necessary database tables if required.
+Set up any specific configurations, dependencies, or environment variables that are unique to your project. Ensure that your database connection is properly configured in the `.env` file, and create necessary database tables if required.
 
 ### 5. Run Database Migrations
 
