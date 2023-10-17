@@ -7,5 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index',['filter' => 'signedout']);
 $routes->match(['get','post'],'auth/register', 'Auth::register',['filter' => 'signedout']);
+$routes->match(['get','post'],'auth/login', 'Auth::login',['filter' => 'signedout']);
 // $routes->get('auth/register', 'Auth::register',['filter' => 'signedout']);
-$routes->get('dashboard', 'Home::dashboard',['filter' => 'signedin']);
+$routes->get('auth/dashboard', 'Auth::dashboard',['filter' => 'signedin']);
+$routes->get('auth/logout', 'Auth::logout',['filter' => 'signedin']);
+

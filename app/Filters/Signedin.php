@@ -12,7 +12,7 @@ class Signedin implements FilterInterface
     {
         if(!session()->get('isLoggedIn'))
         {
-            return redirect()->to(base_url());
+            return redirect()->to('/auth/login');
         }
     }
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

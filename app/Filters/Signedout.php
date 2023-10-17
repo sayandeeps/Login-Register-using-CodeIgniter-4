@@ -12,7 +12,7 @@ class Signedout implements FilterInterface
     {
         if(session()->get('isLoggedIn'))
         {
-            return redirect()->to('dashboard');
+            return redirect()->to('/auth/dashboard');
         }
     }
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)

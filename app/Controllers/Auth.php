@@ -8,12 +8,64 @@ class Auth extends BaseController
 {
 
 
-
-
-    public function index()
-    {
-        echo "Login done";
+    public function dashboard(){
+        return view('dashboard');
     }
+
+
+
+    public function login()
+    {
+       
+        $data=[];
+        helper('form');
+        if($this->request->getMethod()=='post'){
+            $rules = [
+                'email' => 'required|valid_email',
+                'password' => 'required',
+
+            ];
+            if($this->validate($rules)){
+                $model = new UserInfoModel();
+                $email = $this->request->getVar('email');
+                $password = $this->request->getVar('password');
+                $user=$model->where('email',$email)->first();
+
+                if($user && password_verify($password,$user['password'])){
+                    $this->setSession($user);
+                    // return redirect()->to('/auth/dashboard');
+                    $data['success'] = TRUE;
+                   
+                    
+                }else{
+                    $data['error'] = TRUE;
+                }
+            }else{
+                $data['validation'] = $this->validator;
+            }
+        }
+        return view('welcome_message',$data);
+    }
+
+    private function setSession($user)
+    {
+        $session = session();
+        $session->set('user_id', $user['id']);
+        $session->set('user_name', $user['name']);
+        $session->set('isLoggedIn', true);
+
+    }
+
+    public function logout()
+{
+    $session = session();
+    $session->remove('user_id');
+    $session->remove('user_name');
+    $session->remove('isLoggedIn');
+
+    return redirect()->to('/auth/login'); 
+}
+
     public function register()
     {
         $data=[];
@@ -43,6 +95,8 @@ class Auth extends BaseController
                 );
                 if($model->save($newData)){
                     $data['Flash_message'] = TRUE;
+
+                
 
                 }
 
