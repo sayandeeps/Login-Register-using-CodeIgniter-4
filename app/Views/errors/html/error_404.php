@@ -67,18 +67,23 @@
             color: #dd4814;
         }
     </style>
+      <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
-    <div class="wrap">
-        <h1>404</h1>
-
-        <p>
-            <?php if (ENVIRONMENT !== 'production') : ?>
-                <?= nl2br(esc($message)) ?>
-            <?php else : ?>
-                <?= lang('Errors.sorryCannotFind') ?>
-            <?php endif ?>
-        </p>
-    </div>
+<div class="flex items-center justify-center h-screen">
+                                            <div class="flex-col space-y-4 text-center">
+                                                <div class="text-5xl font-medium">Page not found</div>
+                                                <div class="text-gray-500">Sorry, the page you're looking for isn't available.</div>
+                                                <div class="flex items-center justify-center">
+                                                    <div class="bg-fuchsia-600 px-4 py-1 text-white font-medium rounded-lg  hover:scale-105 cursor-pointer"><a href="<?= site_url('/')?>"><span class="text-white">Back to home</span></a></div>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                
+                                
+                                    <script src="https://cdn.tailwindcss.com"></script> 
 </body>
 </html>
