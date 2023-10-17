@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\UserInfoModel;
 use App\Controllers\BaseController;
 
 class Auth extends BaseController
@@ -32,7 +32,20 @@ class Auth extends BaseController
                 $data['validation'] = $this->validator;
 
             }else{
-                echo 111;exit;
+                // echo 111;exit;
+
+                $model = new UserInfoModel();
+                $newData=array(
+                    'name' => $this->request->getVar('nameuser'),
+                    'email' => $this->request->getVar('email'),
+                    'password' => $this->request->getVar('password'),
+
+                );
+                if($model->save($newData)){
+                    $data['Flash_message'] = TRUE;
+
+                }
+
             }
             // echo 111;exit;
 

@@ -32,6 +32,13 @@
                     </div>
                     </div>
                     <?php endif; ?>
+                    <?php if (isset($Flash_message)) : ?>
+                        <div class = "col-12" >
+                            <div class = "alert alert-success" role= "alert">
+                                Congrats !!! Registration Successful
+                    </div>
+                    </div>
+                    <?php endif; ?>
                     <form action="<?= site_url('/auth/register') ?>" method="post" class="p-0 m-0">
                     <?= csrf_field() ?>
                     <div class="mb-7">
@@ -48,7 +55,7 @@
                             <div class="relative flex items-center">
                                 <input type="password"
                                     class="w-full px-4 py-4 bg-gray-200 rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 "
-                                    name="password" placeholder="Enter password" value="<?= set_value('password')?>">
+                                    name="password" placeholder="Enter password" >
                             
                             </div>
                         </div>
@@ -56,7 +63,7 @@
                             <div class="relative flex items-center">
                                 <input type="password"
                                     class="w-full px-4 py-4 bg-gray-200 rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 "
-                                    name="passwordconf" placeholder="re-enter the password" value="<?= set_value('passwordconf')?>">
+                                    name="passwordconf" placeholder="re-enter the password" >
                             
                             </div>
                         </div>
