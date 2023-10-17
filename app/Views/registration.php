@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
 </head>
 <body>
@@ -24,23 +25,30 @@
                     </a>
                 </span>
                 <div class="">
-                    <form action="<?= base_url('/auth/register_user') ?>" method="post" class="p-0 m-0">
+                    <?php if (isset($validation)) : ?>
+                        <div class = "col-12" >
+                            <div class = "alert alert-danger" role= "alert">
+                                <?= $validation->listErrors() ?>
+                    </div>
+                    </div>
+                    <?php endif; ?>
+                    <form action="<?= site_url('/auth/register') ?>" method="post" class="p-0 m-0">
                     <?= csrf_field() ?>
                     <div class="mb-7">
-                            <input type="name"
+                            <input type="text"
                                 class="w-full px-4 py-4 bg-gray-200 rounded-lg dark:bg-gray-700 lg:py-5 dark:text-gray-300 "
-                                name="nameuser" placeholder="Enter your Name">
+                                name="nameuser" placeholder="Enter your Name" value="<?= set_value('nameuser')?>">
                         </div>
                         <div class="mb-7">
-                            <input type="email"
+                            <input type="text"
                                 class="w-full px-4 py-4 bg-gray-200 rounded-lg dark:bg-gray-700 lg:py-5 dark:text-gray-300 "
-                                name="email" placeholder="Enter your email">
+                                name="email" placeholder="Enter your email" value="<?= set_value('email')?>">
                         </div>
                         <div class="mb-6">
                             <div class="relative flex items-center">
                                 <input type="password"
                                     class="w-full px-4 py-4 bg-gray-200 rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 "
-                                    name="password" placeholder="Enter password">
+                                    name="password" placeholder="Enter password" value="<?= set_value('password')?>">
                             
                             </div>
                         </div>
@@ -48,7 +56,7 @@
                             <div class="relative flex items-center">
                                 <input type="password"
                                     class="w-full px-4 py-4 bg-gray-200 rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 "
-                                    name="passwordconf" placeholder="re-enter the password">
+                                    name="passwordconf" placeholder="re-enter the password" value="<?= set_value('passwordconf')?>">
                             
                             </div>
                         </div>

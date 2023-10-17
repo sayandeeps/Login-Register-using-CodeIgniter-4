@@ -16,30 +16,31 @@ class Auth extends BaseController
     }
     public function register()
     {
-        return view('registration');
-    }
+        $data=[];
+        helper('form');
+        if($this->request->getMethod()=='post'){
+            
+            $rules = [
+                'nameuser' => 'required|min_length[3]|max_length[30]',
+                'email' => 'required|min_length[8]|max_length[50]|valid_email|is_unique[user_info.email]',
+                'password' => 'required|min_length[4]|max_length[30]',
+                'passwordconf' => 'matches[password]',
 
-    public function register_user()
-    {
-        
-        $validated = $this->validate([
-                'name'=> 'required',
-                'email' => 'required|valid_email',
-                'password' => 'required|min_length[5]|max_length[20]',
-                'passwordConf'=> 'required|min_length[5]|max_length[20]|matches[password]'
-             ]);
-        if(!$validated){
 
-            return view('registration', ['validation' => $this->validator]);
+            ];
+            if (!$this->validate($rules)){
+                $data['validation'] = $this->validator;
+
+            }else{
+                echo 111;exit;
+            }
+            // echo 111;exit;
 
         }
 
 
-
-
+        return view('registration',$data);
+        // return view('registration');
     }
-
-
-
 }
  
