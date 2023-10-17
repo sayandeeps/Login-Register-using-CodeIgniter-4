@@ -24,7 +24,7 @@
                     </a>
                 </span>
                 <div class="">
-                    <form action="" method="post" class="p-0 m-0">
+                    <form action="<?= base_url('/auth/register_user') ?>" method="post" class="p-0 m-0">
                     <?= csrf_field() ?>
                     <div class="mb-7">
                             <input type="name"
@@ -48,7 +48,7 @@
                             <div class="relative flex items-center">
                                 <input type="password"
                                     class="w-full px-4 py-4 bg-gray-200 rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700 "
-                                    name="password" placeholder="re-enter the password">
+                                    name="passwordconf" placeholder="re-enter the password">
                             
                             </div>
                         </div>
