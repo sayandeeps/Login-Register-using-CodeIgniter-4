@@ -9,8 +9,20 @@ class Auth extends BaseController
 
 
     public function dashboard(){
-        return view('dashboard');
+        $session=session();
+        $user_id=session()->get('user_id');
+        $model = new UserInfoModel();
+        $user = $model->find($user_id);
+        if ($user) {
+            $userData = [
+                'username' => $user['name'],
+                'created_at' => $user['created_at'],
+                'email' => $user['email'],
+                'id' => $user['id'],
+            ];
+        return view('dashboard',$userData);
     }
+}
 
 
 
@@ -35,6 +47,7 @@ class Auth extends BaseController
                     $this->setSession($user);
                     // return redirect()->to('/auth/dashboard');
                     $data['success'] = TRUE;
+                    echo session()->get('user_id');die();
                    
                     
                 }else{
