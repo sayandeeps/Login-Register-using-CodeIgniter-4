@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserInfoModel;
+use App\Models\UserDetailsModel;
 use App\Controllers\BaseController;
 
 class Auth extends BaseController
@@ -47,7 +48,7 @@ class Auth extends BaseController
                     $this->setSession($user);
                     // return redirect()->to('/auth/dashboard');
                     $data['success'] = TRUE;
-                    echo session()->get('user_id');die();
+                    // echo session()->get('user_id');die();
                    
                     
                 }else{
@@ -79,48 +80,45 @@ class Auth extends BaseController
     return redirect()->to('/auth/login'); 
 }
 
-    public function register()
-    {
-        $data=[];
-        helper('form');
-        if($this->request->getMethod()=='post'){
-            
-            $rules = [
-                'nameuser' => 'required|min_length[3]|max_length[30]',
-                'email' => 'required|min_length[8]|max_length[50]|valid_email|is_unique[user_info.email]',
-                'password' => 'required|min_length[4]|max_length[30]',
-                'passwordconf' => 'matches[password]',
-
-
+public function register()
+{
+    $data = [];
+    helper('form');
+    if ($this->request->getMethod() == 'post') {
+        $rules = [
+            'nameuser' => 'required|min_length[3]|max_length[30]',
+            'email' => 'required|min_length[8]|max_length[50]|valid_email|is_unique[user_info.email]',
+            'password' => 'required|min_length[4]|max_length[30]',
+            'passwordconf' => 'matches[password]',
+        ];
+        if (!$this->validate($rules)) {
+            $data['validation'] = $this->validator;
+        } else {
+            $model = new UserInfoModel();
+            $newData = [
+                'name' => $this->request->getVar('nameuser'),
+                'email' => $this->request->getVar('email'),
+                'password' => $this->request->getVar('password'),
             ];
-            if (!$this->validate($rules)){
-                $data['validation'] = $this->validator;
+            if ($model->save($newData)) {
+                $user_info_id = $model->getInsertID();
 
-            }else{
-                // echo 111;exit;
+                $userDetailsModel = new UserDetailsModel();
+                $userDetailsData = [
+                    'user_id' => $user_info_id,
+                    'address' => '',
+                    'designation' => '',
+                    'phone' => '',
+                ];
 
-                $model = new UserInfoModel();
-                $newData=array(
-                    'name' => $this->request->getVar('nameuser'),
-                    'email' => $this->request->getVar('email'),
-                    'password' => $this->request->getVar('password'),
+                $userDetailsModel->save($userDetailsData);
 
-                );
-                if($model->save($newData)){
-                    $data['Flash_message'] = TRUE;
-
-                
-
-                }
-
+                $data['Flash_message'] = true;
             }
-            // echo 111;exit;
-
         }
-
-
-        return view('registration',$data);
-        // return view('registration');
     }
+    return view('registration', $data);
+}
+
 }
  
