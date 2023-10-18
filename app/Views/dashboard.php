@@ -95,6 +95,10 @@
                 <a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="/auth/logout">Log Out</a>
                
             </div>
+            <div class="text-center my-3">
+                <a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="/auth/deleteuser">Delete Account</a>
+               
+            </div>
 
         </div>
     </div>

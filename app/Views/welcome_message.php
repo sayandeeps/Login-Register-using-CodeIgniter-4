@@ -44,6 +44,13 @@
                                     </div>
                                     </div>
                                     <?php endif; ?>
+                                    <?php if (isset($deleted)) : ?>
+                                        <div class = "col-12 bg-gray-100" >
+                                            <div class = "bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role= "alert">
+                                                User Deleted Successfully
+                                    </div>
+                                    </div>
+                                    <?php endif; ?>
 
                                 <form action="/auth/login" method="post" class="mt-4">
                                     <?= csrf_field() ?>

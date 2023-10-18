@@ -7,7 +7,35 @@ use App\Controllers\BaseController;
 
 class Auth extends BaseController
 {
+    public function deleteuser(){
+        // Check if the user_id exists in the session
 
+        $user_id = session('user_id');
+    
+        if ($user_id) {
+            // Create an instance of UserInfoModel
+            $model = new UserInfoModel();
+    
+            // Delete the user with the specified 'id'
+            $deleted = $model->where('id', $user_id)->delete();
+    
+            if ($deleted) {
+                
+                $data['deleted'] = TRUE;
+                session()->remove('user_id');
+                session()->remove('user_name');
+                session()->remove('isLoggedIn');
+                return redirect()->to('/auth/login');
+
+            }else{
+                return redirect()->to('/auth/login');
+            }
+        } else {
+            return "User not authenticated.";
+        }
+    }
+    
+   
 
     public function dashboard(){
         $session=session();
