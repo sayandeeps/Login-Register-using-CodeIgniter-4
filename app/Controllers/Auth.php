@@ -13,6 +13,8 @@ class Auth extends BaseController
         $session=session();
         $user_id=session()->get('user_id');
         $model = new UserInfoModel();
+        $model2 = new UserDetailsModel();
+        $otherinfo = $model2->where('user_id', $user_id)->first();
         $user = $model->find($user_id);
         if ($user) {
             $userData = [
@@ -20,13 +22,36 @@ class Auth extends BaseController
                 'created_at' => $user['created_at'],
                 'email' => $user['email'],
                 'id' => $user['id'],
+                'address' => $otherinfo['address'],
+                'designation' => $otherinfo['designation'],
+                'phone' => $otherinfo['phone'],
             ];
         return view('dashboard',$userData);
     }
 }
 
 
+    public function edit(){
 
+        $session = session();
+        $user_id = $session->get('user_id');
+        // echo $user_id;die();
+        $model = new UserDetailsModel();
+        $userDetails = $model->where('user_id', $user_id)->first(); //this is the array of the row foreach laga sakte hain
+        // echo var_dump($userDetails);die();
+        if($this->request->getMethod() == 'post') {
+            $newData = [
+                'address' => $this->request->getVar('address'),
+                'designation' => $this->request->getVar('designation'),
+                'phone' => $this->request->getVar('phone'),
+            ];
+            $model->update($userDetails['id'], $newData);
+
+            return redirect()->to('/auth/dashboard');
+        }
+
+
+    }
     public function login()
     {
        
@@ -46,7 +71,7 @@ class Auth extends BaseController
 
                 if($user && password_verify($password,$user['password'])){
                     $this->setSession($user);
-                    // return redirect()->to('/auth/dashboard');
+                    return redirect()->to('/auth/dashboard');
                     $data['success'] = TRUE;
                     // echo session()->get('user_id');die();
                    
