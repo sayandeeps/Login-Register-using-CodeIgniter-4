@@ -1,6 +1,13 @@
 # CodeIgniter 4 Login and Register Project
 
 This is a simple login and register project built with CodeIgniter 4 and MySQL.
+few screenshots
+login page and register page
+![Login Page](https://i.ibb.co/hKX2Gfn/Screenshot-2023-10-19-at-9-29-16-AM.png)
+Dashboard and edit page
+![Register Page](https://i.ibb.co/RjMCQk6/image.png)
+edit and upload image page
+![edit and upload image page](https://i.ibb.co/2hBZZZS/Screenshot-2023-10-19-at-9-39-06-AM.png)
 
 ## Getting Started
 
