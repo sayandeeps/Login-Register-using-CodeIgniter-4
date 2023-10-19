@@ -2,3 +2,4 @@
 .vscode/
 /vendor/
 /writable/
+/public/uploads

@@ -3,7 +3,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 class UserInfoModel extends Model{
     protected $table = 'user_info';
-    protected $allowedFields = ['id' , 'name', 'email' ,'password', 'created_at' , 'updated_at' ];
+    protected $allowedFields = ['id' , 'avatar' ,'name', 'email' ,'password', 'created_at' , 'updated_at' ];
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
     protected $primaryKey = 'id';

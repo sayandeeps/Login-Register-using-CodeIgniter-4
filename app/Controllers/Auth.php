@@ -7,6 +7,43 @@ use App\Controllers\BaseController;
 
 class Auth extends BaseController
 {
+
+
+    public function uploadpic()
+    {
+        $file = $this->request->getFile('userfile');
+        // echo var_dump($file);die();
+        
+        
+        if ($file->isValid() && !$file->hasMoved()) {
+            $allowedExtensions = ['png', 'jpg', 'jpeg', 'gif']; 
+        
+            if (in_array($file->getExtension(), $allowedExtensions)) {
+               
+                $user_id = session()->get('user_id');
+                $user_name = session()->get('user_name');
+                
+                if ($user_id) {
+                    $newName = $user_id .'_'.$user_name .'_' . $file->getRandomName();
+                    // var_dump($newName);die();
+                    $file->move('uploads', $newName);
+                    $model = new UserInfoModel();
+                    $data = [
+                        'avatar' => $newName
+                    ];
+                    $model->update($user_id, $data);
+                    return redirect()->to('/auth/dashboard');   
+                } else {
+                    echo 'User session not found.';
+                }
+            } else {
+                echo 'Only specific file types are allowed (e.g., PNG, JPG, JPEG, GIF).';
+            }
+        } else {
+            echo 'File upload failed.';
+        }
+    }
+
     public function deleteuser(){
         // Check if the user_id exists in the session
 
@@ -53,6 +90,7 @@ class Auth extends BaseController
                 'address' => $otherinfo['address'],
                 'designation' => $otherinfo['designation'],
                 'phone' => $otherinfo['phone'],
+                'avatar' => $user['avatar'],
             ];
         return view('dashboard',$userData);
     }
@@ -167,6 +205,8 @@ public function register()
                 $userDetailsModel->save($userDetailsData);
 
                 $data['Flash_message'] = true;
+                return redirect()->to('/auth/dashboard');   
+
             }
         }
     }
