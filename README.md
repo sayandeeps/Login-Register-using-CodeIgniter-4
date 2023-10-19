@@ -55,3 +55,17 @@ You can now start using the login and registration functionality in your CodeIgn
 ### 5. License
 
 This project is licensed under the [MIT License](https://github.com/sayandeeps/login_register_using_CI4/blob/main/LICENSE.md).
+
+### 6. Note
+
+To start the spark server.
+
+```
+php spark serve
+```
+
+as per my code the login / register flow start from
+
+```
+localhost:<your_port_number>/auth/login
+```

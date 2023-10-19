@@ -20,7 +20,7 @@
         <div class="max-w-xl mx-auto ">
             <div class="w-full shadow-lg bg-gray-50 dark:bg-gray-800 mt-11 lg:-mt-36 lg:full p-7 rounded-3xl">
                 <span class="flex justify-end mb-8">
-                    <a href="<?= site_url('/') ?>" class="px-4 py-3 text-sm font-medium text-gray-100 bg-blue-700 hover:text-blue-200 rounded-lg">
+                    <a href="<?= site_url('/auth/login') ?>" class="px-4 py-3 text-sm font-medium text-gray-100 bg-blue-700 hover:text-blue-200 rounded-lg">
                         Login
                     </a>
                 </span>
@@ -69,7 +69,7 @@
                         </div>
                         <button
                             class="w-full px-4 py-4 mt-6 font-medium text-gray-200 bg-blue-700 rounded-lg dark:bg-blue-500 hover:text-blue-200 "
-                            type="submit">LOGIN</button>
+                            type="submit">REGISTER</button>
                       
                     </form>
                 </div>
